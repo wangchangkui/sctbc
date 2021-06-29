@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sctbc.Dao.Stu_classMapper">
+
+    <insert id="addClass" parameterType="map">
+        insert into stu_class(id, name, spe_id)
+        VALUES (#{classId},#{className},#{speId})
+    </insert>
+
+    <select id="queryClassIdAndName" resultType="com.sctbc.Pojo.Stu_class">
+        select *
+        from stu_class
+        where spe_id=#{speId}
+    </select>
+
+    <insert id="addTimetable" parameterType="map">
+        insert into timetable(id, cur_id, class_id, tea_id)
+        VALUES (#{timetableId},#{curriId},#{classId},#{teaId})
+    </insert>
+
+</mapper>

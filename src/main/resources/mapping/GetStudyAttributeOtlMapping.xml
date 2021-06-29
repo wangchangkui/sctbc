@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sctbc.Dao.GetStudyAttributeOtlMapper">
+
+    <select id="queryStudentSignTrue" parameterType="map" resultType="map">
+        select count(id) signCountTrue
+        from Sign
+        where studentid=#{stuId} and curriculumID=#{curriId} and Signflag="已签到"
+    </select>
+
+    <select id="queryStudentSignAll" parameterType="map" resultType="map">
+        select count(id) signCountAll
+        from Sign
+        where studentid=#{stuId} and curriculumID=#{curriId}
+    </select>
+
+    <select id="queryStudyAttribute" parameterType="map" resultType="com.sctbc.Pojo.outline.GetStudyAttributeOtl">
+        select *,s.name stu_name
+        from learn_date
+            inner join student s on s.id=learn_date.stu_id
+        where stu_id=#{stuId} and cur_Id=#{curriId}
+    </select>
+
+
+</mapper>

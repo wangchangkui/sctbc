@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sctbc.Dao.CurriculumMapper">
+
+    <insert id="addCurri" parameterType="com.sctbc.Pojo.Curriculum">
+        insert into curriculum(id, name)
+        values(#{id},#{name})
+    </insert>
+
+    <select id="findClass" parameterType="map" resultType="com.sctbc.Pojo.Stu_class">
+        select s.*
+        from stu_class s,timetable t
+        where t.cur_id=#{curriId} and t.tea_id=#{teaId}
+    </select>
+
+    <select id="findCurri" parameterType="map" resultType="com.sctbc.Pojo.Curriculum">
+        select *
+        from curriculum
+        where curriculum.id=
+              (select cur_id from timetable where tea_id=#{teaId} and class_id=#{classId})
+    </select>
+
+    <select id="findCurriOutline" parameterType="map" resultType="com.sctbc.Pojo.outline.CurriculumOtl">
+        select *
+        from learn_date l
+            left join timetable t on l.cur_Id = t.cur_id
+        where l.cur_Id=#{curriId} and t.tea_id=#{teaId} and t.class_id=#{classId}
+    </select>
+
+    <select id="findCurriAllStu" parameterType="map" resultType="com.sctbc.Pojo.outline.Learn_dateOtl">
+        select l.*,s.name stu_name
+        from learn_date l
+            left join timetable t on l.cur_Id = t.cur_id
+            right join student s on l.stu_id = s.id
+        where l.cur_Id=#{curriId} and t.tea_id=#{teaId} and t.class_id=#{classId}
+    </select>
+</mapper>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sctbc.Dao.WorkCountMapper">
+
+
+    <insert id="InsertData" parameterType="com.sctbc.Pojo.WorkCount">
+        insert into WorkCount (id, StudentID, studentName, classID, CurrID, WorkName, Done, Grende, DoneTime)
+        values (#{id},#{StudentID},#{studentName},#{classID},#{CurrID},#{WorkName},#{Done},#{Grende},#{DoneTime});
+    </insert>
+    <delete id="DeleteData" parameterType="map">
+        delete from WorkCount
+        where classID=#{classID} and CurrID=#{CurrID}
+    </delete>
+</mapper>

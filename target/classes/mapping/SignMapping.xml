@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sctbc.Dao.SignMapper">
+
+
+    <insert id="InsertSignData" parameterType="com.sctbc.Pojo.Sign">
+        INSERT INTO `Sign`(`id`, `studentid`, `studentName`, `ClassID`,`SignName`, `SignType`, `Signflag`, `SignTime`,`curriculumID`) VALUES (#{id},#{studentid},#{studentName},#{ClassID},#{SignName},#{SignType},#{Signflag},#{SignTime},#{curriculumID})
+    </insert>
+    <delete id="DeletSignData" parameterType="string">
+        delete from Sign where ClassID=#{classID} and curriculumID=#{CurrID}
+    </delete>
+</mapper>

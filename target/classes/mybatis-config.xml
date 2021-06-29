@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+
+
+<!--    其实在springboot里面以及不需要这个文件了 在application中配置就好  学习时候使用-->
+
+<!--    properties配置-->
+
+<!--mybatis 设置-->
+
+<!--    别名配置-->
+    <typeAliases>
+        <typeAlias type="com.sctbc.Pojo.Teacher" alias="Teacher"></typeAlias>
+        <typeAlias type="com.sctbc.Pojo.Student" alias="Student"></typeAlias>
+        <typeAlias type="com.sctbc.Pojo.Learn_date" alias="Learn_date"></typeAlias>
+    </typeAliases>
+<!--    多环境-->
+    <environments default="development">
+<!--        环境名称-->
+        <environment id="development">
+<!--            JDBC管理-->
+            <transactionManager type="JDBC"/>
+<!--            数据源-->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://101.37.253.142:3306/sctbc?useAffectedRows=true&amp;serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
+                <property name="username" value="sctbc"/>
+                <property name="password" value="sctbc"/>
+            </dataSource>
+        </environment>
+    </environments>
+</configuration>

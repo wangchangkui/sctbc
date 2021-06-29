@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sctbc.Dao.TeacherMapper">
+    <update id="updateTeacher" parameterType="com.sctbc.Pojo.Teacher">
+        update teacher
+        set
+            `name`=#{name},
+            `sex`=#{sex},
+            `fac_id`=#{fac_id},
+            `phone`=#{phone},
+            `password`=#{password},
+            `flag_id`=${flag_id}
+        where id=#{id};
+    </update>
+
+    <select id="queryTeacherList" resultType="com.sctbc.Pojo.Teacher">
+        select *
+        from teacher
+    </select>
+
+    <select id="getTeacherById" parameterType="String" resultType="com.sctbc.Pojo.Teacher">
+        select *
+        from teacher
+        where id=#{id}
+    </select>
+
+    <select id="getTeacherListLike" parameterType="String" resultType="com.sctbc.Pojo.Teacher">
+        select *
+        from teacher
+        where name like #{name};
+    </select>
+
+    <select id="getTeacherListByLimit" resultType="com.sctbc.Pojo.Teacher" parameterType="map">
+        select *
+        from teacher
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <select id="selectTeacher" resultType="com.sctbc.Pojo.Teacher" >
+        select *
+        from teacher
+        where id=#{userid} and password=#{password}
+    </select>
+
+    <insert id="saveTeacher" parameterType="com.sctbc.Pojo.Teacher">
+        INSERT INTO `teacher`(`id`, `name`, `sex`, `fac_id`, `phone`, `password`, `flag_id`)
+        VALUES (#{id},#{name},#{sex},#{fac_id},#{phone},#{password},#{flag_id})
+    </insert>
+
+
+</mapper>

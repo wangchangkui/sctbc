@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sctbc.Dao.TimetableOtlMapper">
+
+    <select id="queryCurriAndClassInfoOtlClassInfo" parameterType="String" resultType="com.sctbc.Pojo.outline.TimetableOtl">
+        select  t.id,t.cur_id,t.class_id,s.name class_name,c.name cur_name
+        from timetable t,stu_class s,curriculum c
+        where t.class_id=s.id and t.cur_id=c.id and t.tea_id=#{teaid}
+    </select>
+
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sctbc.Dao.FileMapper">
+    <insert id="InsertFile" parameterType="com.sctbc.Pojo.File">
+        insert into file(id,filename,filelink,uploadTime,uploadName)
+        values(#{id},#{filename},#{filelink},#{uploadTime},#{uploadName})
+    </insert>
+
+    <select id="FileList" resultType="com.sctbc.Pojo.File">
+        select *
+        from file
+    </select>
+
+
+</mapper>

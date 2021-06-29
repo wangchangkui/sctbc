@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sctbc.Dao.GetStudyHabitsOtlMapper">
+
+    <!--签到-->
+    <select id="queryStudyHabits" parameterType="map" resultType="com.sctbc.Pojo.outline.GetStudyHabitsOtl">
+        select SignName name,Signflag flag,SignTime time
+        from Sign
+        where studentid=#{stuId} and curriculumID=#{curriId}
+    </select>
+
+    <select id="queryEarlyStudyHabits" parameterType="map" resultType="com.sctbc.Pojo.outline.GetStudyHabitsOtl">
+        select SignName name,Signflag flag,SignTime time
+        from Sign
+        where curriculumID=#{curriId} and SignName=#{signName} and SignTime is not null
+        order by SignTime
+        limit 1
+    </select>
+
+    <select id="queryLateStudyHabits" parameterType="map" resultType="com.sctbc.Pojo.outline.GetStudyHabitsOtl">
+        select SignName name,Signflag flag,SignTime time
+        from Sign
+        where curriculumID=#{curriId} and SignName=#{signName} and SignTime is not null
+        order by SignTime desc
+        limit 1
+    </select>
+
+    <!--作业-->
+    <select id="getStudentWorkStat" parameterType="map" resultType="com.sctbc.Pojo.outline.GetStudyHabitsOtl">
+        select WorkName name,Done flag,DoneTime time
+        from WorkCount
+        where StudentID=#{stuId} and CurrID=#{curriId}
+    </select>
+
+    <select id="getEarlyStudentWorkStat" parameterType="map" resultType="com.sctbc.Pojo.outline.GetStudyHabitsOtl">
+        select WorkName name,Done flag,DoneTime time
+        from WorkCount
+        where CurrID=#{curriId} and WorkName=#{workName} and DoneTime is not null
+        order by DoneTime
+        limit 1
+    </select>
+
+    <select id="getLateStudentWorkStat" parameterType="map" resultType="com.sctbc.Pojo.outline.GetStudyHabitsOtl">
+        select WorkName name,Done flag,DoneTime time
+        from WorkCount
+        where CurrID=#{curriId} and WorkName=#{workName} and DoneTime is not null
+        order by DoneTime desc
+        limit 1
+    </select>
+</mapper>

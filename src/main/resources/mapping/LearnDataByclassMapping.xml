@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sctbc.Dao.LearnDataClassMapper">
+
+    <resultMap id="Learnmap" type="com.sctbc.Pojo.CommData.LearnDataByclass">
+        <result property="task_number" column="t_num"></result>
+        <result property="task_point" column="tpoint"></result>
+        <result property="name" column="class_name"></result>
+        <result property="class_id" column="class_id"></result>
+    </resultMap>
+    <select id="getLearnDate"  resultMap="Learnmap" resultType="int">
+        select
+               AVG(l.task_num) as t_num,
+               AVG(l.task_point) as tpoint,
+               t.class_id as class_id,
+               s.name as class_name
+        from learn_date l,timetable t,stu_class s
+        where l.cur_Id=t.cur_id and t.class_id =s.id and t.class_id=#{stu_classID}
+    </select>
+</mapper>

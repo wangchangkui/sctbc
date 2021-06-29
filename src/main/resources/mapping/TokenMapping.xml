@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sctbc.Dao.TokenMapper">
+
+
+    <insert id="AddToken" parameterType="map">
+        insert into token
+        values (#{userid},#{token})
+    </insert>
+    <update id="UpdateToken" parameterType="string">
+        update token
+        set token=#{token}
+        where userid=#{userid}
+    </update>
+
+    <delete id="DeleteToken" parameterType="string">
+        delete from token
+        where token=#{token}
+    </delete>
+
+    <select id="SelectToken" resultType="java.lang.String">
+        select *
+        from token
+        where token=#{token}
+    </select>
+    <select id="selectTokenByuserid" resultType="com.sctbc.Pojo.Token">
+        select *
+        from token
+        where userid=#{userid}
+    </select>
+</mapper>

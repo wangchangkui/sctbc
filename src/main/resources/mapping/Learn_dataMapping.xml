@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sctbc.Dao.Learn_dataMpper">
+    <insert id="InsertData" parameterType="com.sctbc.Pojo.Learn_date">
+        INSERT INTO `learn_date`(
+            `id`, `stu_id`, `cur_Id`, `task_num`,
+            `task_point`, `chapter_num`, `homework_num`,
+            `hoemwork_point`, `homework_averge`, `Grend`
+        )
+        VALUES
+        (
+            #{id},#{stu_id},#{cur_id},#{task_num},#{task_point},#{chapter_num},#{homework_num},#{hoemwork_point},#{homework_averge},#{Grend}
+        )
+    </insert>
+
+
+
+    <select id="getSignCount" resultType="com.sctbc.Pojo.outline.Learn_date1Otl">
+        select studentid stu_id,studentName stu_name,Signflag
+        from Sign
+        where curriculumID=#{curriId} and ClassID=#{classId}
+    </select>
+    <select id="getStudentLearnDataByInfo" resultType="com.sctbc.Pojo.outline.Learn_date2Otl">
+        select l.stu_id,l.task_point,l.chapter_num,l.hoemwork_point,l.Grend learn_dateGrade,w.studentName stu_name,count(w.StudentID) WorkCounts,count(s.studentid) SignCounts
+        from learn_date l
+            inner join WorkCount w on l.stu_id=w.StudentID
+            inner join Sign s on l.stu_id=s.studentid
+        where l.cur_Id=#{curriId} and w.classId=#{classId}
+    </select>
+    <select id="getWorkGrades" resultType="com.sctbc.Pojo.outline.Learn_date3Otl">
+        select Studentid stu_id,studentName stu_name,WorkName,Grende WorkGrade
+        from WorkCount
+        where CurrID=#{curriId} and classID=#{classId}
+    </select>
+    <select id="getExampleGrades" resultType="com.sctbc.Pojo.outline.Learn_date4Otl">
+        select studentID stu_id,StudentName stu_name,ExampleName,Grende ExampleGrade
+        from Example
+        where CurrID=#{curriId} and ClassId=#{classId}
+    </select>
+    <select id="learnDateList" resultType="com.sctbc.Pojo.Learn_date">
+        select * from learn_date
+    </select>
+
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sctbc.Dao.StudentMapper">
+
+
+    <insert id="addStudent" parameterType="com.sctbc.Pojo.Student">
+        INSERT INTO `student`(`id`, `name`, `sex`, `class_id`, `idcard`, `phone`, `address`, `gredeyear`, `password`, `flag_id`, `educationSchool`, `educationType_id`, `agriculture`, `home_phone`, `home_money_id`)
+        VALUES (#{id},#{name},#{sex},#{class_id},#{idcard},#{phone},#{address},#{gredeyear},#{password},#{flag_id},#{educationSchool},#{educationType_id},#{agriculture},#{home_phone},#{home_money_id})
+    </insert>
+
+    <select id="studentList" resultType="com.sctbc.Pojo.Student">
+        select *
+        from student
+    </select>
+
+    <select id="findStudentById" parameterType="String" resultType="com.sctbc.Pojo.outline.Student2">
+        select s.*,sc.name class_name
+        from student s
+            inner join stu_class sc on s.class_id = sc.id
+        where s.id=#{id}
+    </select>
+
+    <select id="selectStudent" resultType="com.sctbc.Pojo.Student" >
+        select *
+        from student
+        where id=#{userid} and password=#{password}
+    </select>
+
+    <select id="searchSchoolInfo" resultType="com.sctbc.Pojo.outline.SchoolInfo" >
+        select f.name faculies,s.name specialities, sc.name classes
+        from faculty f
+            inner join speciality s on f.id=s.fac_id
+            inner join stu_class sc on s.id=sc.spe_id
+    </select>
+
+    <update id="editStudentById">
+        update student
+        set class_id=#{class_id},idcard=#{idcard},name=#{name},sex=#{sex},address=#{address},phone=#{phone},home_phone=#{home_phone},educationSchool=#{educationSchool}
+        where id=#{id}
+    </update>
+
+</mapper>

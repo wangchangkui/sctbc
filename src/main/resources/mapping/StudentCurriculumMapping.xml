@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sctbc.Dao.StudentCurriculumMapper">
+
+    <select id="findCurri" resultType="com.sctbc.Pojo.student.StudentCurriculum">
+        select c.id id,c.name currName,tea.name teacherName
+        from timetable t
+            left join student s on t.class_id = s.class_id
+            left join curriculum c on t.cur_id = c.id
+            left join teacher tea on t.tea_id = tea.id
+        where s.id=#{id}
+    </select>
+
+</mapper>

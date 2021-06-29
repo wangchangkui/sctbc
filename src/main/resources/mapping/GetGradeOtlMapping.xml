@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sctbc.Dao.GetGradeOtlMapper">
+
+    <!--查询全班某门课程的成绩-->
+    <select id="queryGradeClassByInfo" parameterType="map" resultType="com.sctbc.Pojo.outline.GetGradeOtl">
+        select avg(w.Grende) WorkGrade,avg(l.Grend) learn_dateGrade,avg(e.Grende) ExampleGrade
+        from WorkCount w
+            inner join learn_date l on w.StudentID=l.stu_id
+            inner join Example e on w.StudentID=e.studentID
+        where w.classID=#{classId} and w.CurrID=#{curriId} and l.cur_id=#{curriId} and e.CurrID=#{curriId}
+    </select>
+    <select id="queryUsualGradeClassByInfo" parameterType="map" resultType="com.sctbc.Pojo.outline.GetGradeOtl">
+        select Grend learn_dateGrade
+        from learn_date
+            left join student on student.id=learn_date.stu_id
+        where class_id=#{classId} and cur_Id=#{curriId}
+    </select>
+    <select id="queryExamGradeClassByInfo" parameterType="map" resultType="com.sctbc.Pojo.outline.GetGradeOtl">
+        select Grende ExampleGrade
+        from Example
+        where classID=#{classId} and CurrID=#{curriId}
+    </select>
+    <select id="queryHomeworkGradeClassByInfo" parameterType="map" resultType="com.sctbc.Pojo.outline.GetGradeOtl">
+        select Grende WorkGrade
+        from WorkCount
+        where classID=#{classId} and CurrID=#{curriId}
+    </select>
+
+
+    <!--查询学生某门课程的成绩-->
+    <select id="queryGradeStudentByInfo" parameterType="map" resultType="map">
+        select avg(w.Grende) WorkGrade,avg(l.Grend) learn_dateGrade,avg(e.Grende) ExampleGrade
+        from WorkCount w
+            inner join learn_date l on w.StudentID=l.stu_id
+            inner join Example e on w.StudentID=e.studentID
+        where w.CurrID=#{curriId} and w.StudentID=#{stuId} and l.cur_id=#{curriId} and e.CurrID=#{curriId}
+    </select>
+    <select id="queryUsualGradeStudentByInfo" parameterType="map" resultType="com.sctbc.Pojo.outline.GetGradeOtl">
+        select Grend learn_dateGrade
+        from learn_date
+        where cur_Id=#{curriId} and stu_id=#{stuId}
+    </select>
+    <select id="queryExamGradeStudentByInfo" parameterType="map" resultType="com.sctbc.Pojo.outline.GetGradeOtl">
+        select Grende ExampleGrade
+        from Example
+        where CurrID=#{curriId} and studentID=#{stuId}
+    </select>
+    <select id="queryHomeworkGradeStudentByInfo" parameterType="map" resultType="com.sctbc.Pojo.outline.GetGradeOtl">
+        select Grende WorkGrade
+        from WorkCount
+        where CurrID=#{curriId} and StudentID=#{stuId}
+    </select>
+
+</mapper>

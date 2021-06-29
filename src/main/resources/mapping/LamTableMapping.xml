@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sctbc.Dao.LamTableMapper">
+
+    <select id="findLam" parameterType="map" resultType="com.sctbc.Pojo.LamTable">
+        select *
+        from lamTable
+        where fromid=#{id} and content like #{keycode}
+    </select>
+    <select id="getLamTableList" resultType="com.sctbc.Pojo.LamTable">
+        select *
+        from lamTable
+    </select>
+    <select id="findGetLam" resultType="com.sctbc.Pojo.LamTable">
+        select *
+        from lamTable
+        where toid=#{id}
+    </select>
+    <insert id="sendLam" parameterType="map">
+        insert into lamTable(id, fromid, toid, content, Lamtime, recive)
+        values (#{id},#{fromId},#{toId},#{content},#{lamtime},#{recive})
+    </insert>
+</mapper>
